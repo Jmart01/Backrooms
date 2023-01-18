@@ -37,4 +37,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData MaxStamina;
 	ATTRIBUTE_ACCESSORS(UActorAttributesSet, MaxStamina)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData BatteryLife;
+	ATTRIBUTE_ACCESSORS(UActorAttributesSet, BatteryLife)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData MaxBatteryLife;
+	ATTRIBUTE_ACCESSORS(UActorAttributesSet, MaxBatteryLife)
 };

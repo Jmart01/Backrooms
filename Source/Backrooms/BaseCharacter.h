@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include <GameplayEffectTypes.h>
+#include "GAS.h"
 #include "BaseCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMovedDelegate);
@@ -21,7 +23,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class UGAS* GAS;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
