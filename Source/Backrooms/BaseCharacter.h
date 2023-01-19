@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include <GameplayEffectTypes.h>
 #include "GAS.h"
 #include "BaseCharacter.generated.h"
@@ -11,7 +12,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMovedDelegate);
 
 UCLASS()
-class BACKROOMS_API ABaseCharacter : public ACharacter
+class BACKROOMS_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -25,6 +26,8 @@ protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UGAS* GAS;
+
+	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

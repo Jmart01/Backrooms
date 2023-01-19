@@ -19,6 +19,11 @@ void ABaseCharacter::BeginPlay()
 
 }
 
+UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
+{
+	return GAS;
+}
+
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
 {
