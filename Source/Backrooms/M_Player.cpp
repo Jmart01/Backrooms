@@ -3,10 +3,17 @@
 
 #include "M_Player.h"
 #include "InputMappingContext.h"
+#include "Components/InputComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
 AM_Player::AM_Player()
+{
+	PlayerEye = CreateDefaultSubobject<UCameraComponent>("PlayerEye");
+	TP_Mesh = CreateDefaultSubobject<USkeletalMeshComponent>("TP_Mesh");
+}
+
+void AM_Player::BeginPlay()
 {
 	Super::BeginPlay();
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
@@ -18,10 +25,6 @@ AM_Player::AM_Player()
 			Subsystem->AddMappingContext(PlayerMappingContext, 0);
 		}
 	}
-}
-
-void AM_Player::BeginPlay()
-{
 }
 
 void AM_Player::Move(const FInputActionValue& Value)
@@ -58,7 +61,13 @@ void AM_Player::GiveAbilities()
 	}
 }
 
-void AM_Player::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void AM_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AM_Player::Move);
+	}
 }
+
+
