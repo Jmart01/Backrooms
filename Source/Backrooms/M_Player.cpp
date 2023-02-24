@@ -29,7 +29,12 @@ void AM_Player::BeginPlay()
 
 void AM_Player::Move(const FInputActionValue& Value)
 {
+	const FVector2D MovementVector = Value.Get<FVector2D>();
 	
+	const FVector Forward = GetActorForwardVector();
+	AddMovementInput(Forward, MovementVector.Y);
+	const FVector Right = GetActorRightVector();
+	AddMovementInput(Right, MovementVector.X);
 }
 
 void AM_Player::Look(const FInputActionValue& Value)
